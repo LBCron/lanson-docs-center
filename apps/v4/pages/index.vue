@@ -88,7 +88,7 @@ const resources = [
   {
     title: 'Service status',
     description: 'Public health board for Lanson Audio — no login required.',
-    href: 'https://control.lansonai.com/status/lanson-audio',
+    href: '/status',
     icon: IconGauge,
   },
 ]

@@ -8,7 +8,7 @@ export const siteConfig = {
     twitter: 'https://x.com/zhenthinks',
     linkedin: 'https://linkedin.com/company/lansonai',
     support: 'mailto:support@lansonai.com',
-    status: 'https://control.lansonai.com/status/lanson-audio',
+    status: '/status',
     openapi: 'https://audio.lansonai.com/openapi.json',
     appStore: 'https://apps.apple.com/us/app/lanson-flow/id6796537330',
   },
@@ -24,6 +24,10 @@ export const siteConfig = {
     {
       href: '/docs/api-reference',
       label: 'Reference',
+    },
+    {
+      href: '/status',
+      label: 'Status',
     },
   ],
 }

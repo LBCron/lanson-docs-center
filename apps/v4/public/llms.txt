@@ -87,7 +87,7 @@
 
 - [OpenAPI spec](https://audio.lansonai.com/openapi.json): Machine-readable OpenAPI for the Recorded API.
 - [Health](https://audio.lansonai.com/health): Liveness probe.
-- [Status](https://control.lansonai.com/status/lanson-audio): Service status dashboard.
+- [Status](/status): Service status dashboard.
 
 ## Notes for coding agents
 

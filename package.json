@@ -56,6 +56,6 @@
     "commit-msg": "pnpm commitlint --edit ${1}"
   },
   "lint-staged": {
-    "*": "eslint --fix"
+    "*.{js,mjs,cjs,ts,tsx,vue,json,jsonc,yaml,yml}": "eslint --fix --no-warn-ignored"
   }
 }

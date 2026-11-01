@@ -120,10 +120,18 @@ export default defineNuxtConfig({
     // Production asset caching is handled at the CF layer (hashed filenames).
     // Pages - prerender as static (reset on each deploy)
     '/docs/**': { prerender: true },
+    // Redirect legacy /status/lanson-audio path to /status
+    '/status/lanson-audio': { redirect: { to: '/status', statusCode: 302 } },
     // JSON API - edge-cached at CF, survives across Worker invocations
     '/api/**': {
       headers: {
         'cache-control': 'public, max-age=3600, s-maxage=31536000, stale-while-revalidate=86400',
+      },
+    },
+    // Live monitoring status endpoint - short cache for real-time status
+    '/api/monitoring/**': {
+      headers: {
+        'cache-control': 'public, max-age=15, s-maxage=30, stale-while-revalidate=60',
       },
     },
     // Raw markdown endpoint
