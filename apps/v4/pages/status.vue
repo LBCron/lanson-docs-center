@@ -47,7 +47,7 @@ import {
 
 const title = 'Service Status'
 const description
-  = 'Real-time operational health, availability SLOs, and latency telemetry for Lanson Audio APIs.'
+  = 'Real-time operational health, availability, and latency telemetry for Lanson Audio APIs.'
 
 useSeoMeta({
   title,
@@ -418,7 +418,7 @@ const incidents = computed(() => (data.value?.incidents ?? []).map((row, index) 
       </PageHeaderHeading>
       <PageHeaderDescription>
         {{ currentLang === 'en'
-          ? 'Real-time operational health, availability SLOs, and latency telemetry for Lanson Audio APIs.'
+          ? 'Real-time operational health, availability, and latency telemetry for Lanson Audio APIs.'
           : 'Lanson Audio 实时流式语音、核心引擎与多语言智能服务的健康状态与延迟遥测。'
         }}
       </PageHeaderDescription>
