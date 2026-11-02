@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { siteConfig } from '@/lib/config'
 </script>
 
 <template>
@@ -7,16 +6,7 @@ import { siteConfig } from '@/lib/config'
     <div class="container-wrapper px-4 xl:px-6">
       <div class="flex h-(--footer-height) items-center justify-between">
         <div class="w-full px-1 text-center text-xs leading-loose text-muted-foreground sm:text-sm">
-          © {{ new Date().getFullYear() }} LansonAI. The source code is available on
-          <a
-            :href="siteConfig.links.github"
-            target="_blank"
-            rel="noreferrer"
-            class="font-medium underline underline-offset-4"
-          >
-            GitHub
-          </a>
-          .
+          © {{ new Date().getFullYear() }} LansonAI. All rights reserved.
         </div>
       </div>
     </div>

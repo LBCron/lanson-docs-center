@@ -10,55 +10,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/registry/new-york-v4/ui/sidebar'
-import { showMcpDocs } from '~/lib/flag'
 
-const props = defineProps<{
+defineProps<{
   tree: ContentNavigationItem
 }>()
 
-const TOP_LEVEL_SECTIONS = [
-  { name: 'Start', href: '/docs/start' },
-  {
-    name: 'Realtime',
-    href: '/docs/realtime',
-  },
-  {
-    name: 'Recorded',
-    href: '/docs/recorded',
-  },
-  {
-    name: 'Concepts',
-    href: '/docs/concepts',
-  },
-  {
-    name: 'Guides',
-    href: '/docs/guides',
-  },
-  {
-    name: 'Reference',
-    href: '/docs/api-reference',
-  },
-  {
-    name: 'Production',
-    href: '/docs/production',
-  },
-]
 const EXCLUDED_SECTIONS: string[] = []
 const EXCLUDED_PAGES: string[] = []
 
 const { path } = toRefs(useRoute())
-
-const filteredSections = computed(() =>
-  TOP_LEVEL_SECTIONS.filter(section =>
-    showMcpDocs || !section.href.includes('/mcp'),
-  ),
-)
-
-function isActive(href: string) {
-  return href === '/docs'
-    ? path.value === href
-    : path.value.startsWith(href)
-}
 </script>
 
 <template>
@@ -66,33 +26,11 @@ function isActive(href: string) {
     class="sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-10rem)] overflow-hidden overscroll-none bg-transparent [--sidebar-menu-width:--spacing(56)] lg:flex"
     collapsible="none"
   >
-    <SidebarContent class="w-(--sidebar-menu-width) scroll-fade scrollbar-none overflow-x-hidden pl-2.5">
-      <SidebarGroup class="pt-12">
-        <SidebarGroupLabel class="font-medium text-muted-foreground">
-          Sections
-        </SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            <SidebarMenuItem
-              v-for="{ name, href } in filteredSections"
-              :key="name"
-            >
-              <SidebarMenuButton
-                as-child
-                :is-active="isActive(href)"
-                class="relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
-              >
-                <NuxtLink :to="href">
-                  <span class="absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent" />
-                  {{ name }}
-                </NuxtLink>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-
-      <SidebarGroup v-for="item in tree.children?.filter(section => !EXCLUDED_SECTIONS.includes(section.title.toLocaleLowerCase()))" :key="item.title">
+    <SidebarContent class="w-(--sidebar-menu-width) scroll-fade scrollbar-none overflow-x-hidden pl-2.5 pt-6">
+      <SidebarGroup
+        v-for="item in tree.children?.filter(section => !EXCLUDED_SECTIONS.includes(section.title.toLocaleLowerCase()))"
+        :key="item.title"
+      >
         <SidebarGroupLabel class="font-medium text-muted-foreground">
           {{ item.title }}
         </SidebarGroupLabel>
@@ -106,7 +44,7 @@ function isActive(href: string) {
                 <SidebarMenuButton
                   as-child
                   :is-active="childItem?.path === path"
-                  class="relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
+                  class="relative min-h-[30px] h-auto w-fit overflow-visible border border-transparent py-1 text-[0.8rem] leading-snug font-medium after:absolute after:inset-x-0 after:-inset-y-0.5 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
                 >
                   <NuxtLink :to="childItem?.path">
                     <span class="absolute inset-0 flex w-(--sidebar-width) bg-transparent" />

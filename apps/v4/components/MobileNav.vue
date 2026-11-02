@@ -17,34 +17,6 @@ const props = defineProps<{
 const router = useRouter()
 const open = ref(false)
 
-const TOP_LEVEL_SECTIONS = [
-  { name: 'Start', href: '/docs/start' },
-  {
-    name: 'Realtime',
-    href: '/docs/realtime',
-  },
-  {
-    name: 'Recorded',
-    href: '/docs/recorded',
-  },
-  {
-    name: 'Concepts',
-    href: '/docs/concepts',
-  },
-  {
-    name: 'Guides',
-    href: '/docs/guides',
-  },
-  {
-    name: 'Reference',
-    href: '/docs/api-reference',
-  },
-  {
-    name: 'Production',
-    href: '/docs/production',
-  },
-]
-
 function handleNavigate(path: string) {
   router.push(path)
   open.value = false
@@ -85,51 +57,44 @@ function handleNavigate(path: string) {
     </PopoverTrigger>
 
     <PopoverContent
-      class="bg-background/90 no-scrollbar h-(--reka-popper-available-height) w-(--reka-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+      class="bg-background/95 no-scrollbar h-(--reka-popper-available-height) w-(--reka-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
       align="start"
       side="bottom"
       :align-offset="-16"
       :side-offset="14"
     >
-      <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
-        <div class="flex flex-col gap-4">
-          <div class="text-muted-foreground text-sm font-medium">
+      <div class="flex flex-col gap-8 overflow-auto px-6 py-6">
+        <div class="flex flex-col gap-3">
+          <div class="text-muted-foreground text-xs font-medium tracking-wider uppercase">
             Menu
           </div>
-          <div class="flex flex-col gap-3">
-            <NuxtLink class="text-2xl font-medium" to="/" @click="handleNavigate('/')">
-              Home
-            </NuxtLink>
-            <NuxtLink v-for="(item, index) in items" :key="index" class="text-2xl font-medium" :to="item.href" @click="handleNavigate(item.href)">
+          <div class="flex flex-col gap-2.5">
+            <NuxtLink
+              v-for="(item, index) in items"
+              :key="index"
+              class="text-lg font-medium"
+              :to="item.href"
+              @click="handleNavigate(item.href)"
+            >
               {{ item.label }}
             </NuxtLink>
           </div>
         </div>
-        <div class="flex flex-col gap-4">
-          <div class="text-muted-foreground text-sm font-medium">
-            Sections
-          </div>
-          <div class="flex flex-col gap-3">
-            <NuxtLink
-              v-for="{ name, href } in TOP_LEVEL_SECTIONS"
-              
-              :key="name"
-              :to="href"
-              class="text-2xl font-medium"
-              @click="handleNavigate(href)"
-            >
-              {{ name }}
-            </NuxtLink>
-          </div>
-        </div>
-        <div class="flex flex-col gap-8">
+
+        <div class="flex flex-col gap-6 border-t border-border/60 pt-6">
           <template v-for="(group, index) in tree[0]?.children" :key="index">
-            <div class="flex flex-col gap-4">
-              <div class="text-muted-foreground text-sm font-medium">
+            <div class="flex flex-col gap-3">
+              <div class="text-muted-foreground text-xs font-medium tracking-wider uppercase">
                 {{ group.title }}
               </div>
-              <div class="flex flex-col gap-3">
-                <NuxtLink v-for="item in group.children" :key="item.path" class="flex items-center gap-2 text-2xl font-medium" :to="item.path" @click="handleNavigate(item.path)">
+              <div class="flex flex-col gap-2.5">
+                <NuxtLink
+                  v-for="item in group.children"
+                  :key="item.path"
+                  class="flex items-center gap-2 text-base font-medium text-foreground/90 hover:text-foreground"
+                  :to="item.path"
+                  @click="handleNavigate(item.path)"
+                >
                   {{ item.title }}
                   <span v-if="item.new" class="flex size-2 rounded-full bg-green-500" />
                 </NuxtLink>

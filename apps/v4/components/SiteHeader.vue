@@ -22,10 +22,8 @@ const docData = computed(() => data.value!.find(i => i.stem === 'docs')!)
           </div>
           <Separator
             orientation="vertical"
-            class="ml-2 hidden lg:block"
+            class="ml-2 hidden md:block"
           />
-          <GitHubLink />
-          <Separator orientation="vertical" />
           <ModeSwitcher />
           <!-- <DesignerActions /> -->
         </div>
