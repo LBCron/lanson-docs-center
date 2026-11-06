@@ -156,11 +156,12 @@ const resources = [
             This documentation is designed to be human-readable, agent-readable, and schema-accurate.
           </p>
           <div class="mt-6 grid gap-4 sm:grid-cols-3">
-            <NuxtLink
+            <a
               v-for="resource in resources"
               :key="resource.href"
-              :to="resource.href"
+              :href="resource.href"
               :target="resource.href.startsWith('http') ? '_blank' : undefined"
+              :rel="resource.href.startsWith('http') ? 'noopener noreferrer' : undefined"
               class="group"
             >
               <Card class="h-full transition-colors group-hover:border-foreground/20">
@@ -176,7 +177,7 @@ const resources = [
                   </CardDescription>
                 </CardHeader>
               </Card>
-            </NuxtLink>
+            </a>
           </div>
         </section>
       </div>
